@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Médico 2 — Best Health Care</title>
+<meta name="description" content="Best Health Care — feel free to be healthy. Convenient, affordable and secure primary care for you and your family.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,500&family=Barlow:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2e70ce;
+    --blue-2: #4c86d3;
+    --blue-hover: #5286ce;
+    --navy: #1d2366;
+    --text: #3d79b5;
+    --mint: #47e0b0;
+    --red: #fa4a57;
+    --ice: #e9eff9;
+    --line: #d4e3f9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Noto Sans", system-ui, sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: 100%; margin: 0 auto; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: .6em;
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; line-height: 1.4;
+    padding: 15px 30px; border-radius: 30px; border: 0; cursor: pointer;
+    transition: transform .3s, background-color .3s, color .3s;
+  }
+  .btn:hover { transform: translateY(-8px); }
+  .btn-primary { background: var(--blue); color: #fff; box-shadow: -2px 20px 32px -17px rgba(97,192,211,.84); }
+  .btn-primary:hover { background: var(--blue-hover); }
+  .btn-mint { background: var(--mint); color: #fff; box-shadow: -2px 20px 32px -17px rgba(71,224,176,.82); }
+  .btn-mint:hover { background: var(--red); }
+  .btn-red { background: var(--red); color: #fff; box-shadow: -2px 20px 32px -17px rgba(221,116,102,.84); }
+  .btn-ghost { background: transparent; color: #fff; font-family: Barlow, sans-serif; }
+  .btn-ghost:hover { background: var(--blue-hover); }
+  .btn-link { background: transparent; color: var(--blue); padding: 0; }
+  .btn-link:hover { color: #4054b2; }
+  .btn svg { width: 1em; height: 1em; fill: currentColor; }
+
+  /* Shape dividers */
+  .divider { position: absolute; left: 0; width: 100%; overflow: hidden; line-height: 0; z-index: 2; pointer-events: none; }
+  .divider svg { position: relative; left: 50%; transform: translateX(-50%); width: 300%; display: block; }
+  .divider.top { top: -1px; }
+  .divider.bottom { bottom: -1px; transform: rotate(180deg); }
+  .divider.flip svg { transform: translateX(-50%) rotateY(180deg); }
+
+  /* Top bar */
+  .topbar { background: var(--blue); color: #fff; padding: 0 6%; }
+  .topbar .wrap { max-width: 1200px; display: flex; align-items: center; font-size: 15px; line-height: 1.6; }
+  .topbar h3 { font-size: 15px; font-weight: 600; text-transform: uppercase; padding: 5px 10px 5px 20px; flex: 0 0 12%; white-space: nowrap; }
+  .topbar .hours { flex: 1; padding: 5px 10px; }
+  .topbar .phone { padding: 5px 20px 5px 5px; text-align: right; white-space: nowrap; }
+
+  /* Hero */
+  .hero { position: relative; background: var(--blue); padding: 0 6% 2%; min-height: 40vh; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 120% at 100% 0%, rgba(255,255,255,.12), transparent 60%), linear-gradient(240deg, var(--blue) 54%, var(--ice) 95%); }
+  .hero .wrap { position: relative; z-index: 3; max-width: 1350px; display: flex; align-items: center; min-height: 40vh; }
+  .hero-text { flex: 0 0 50%; padding: 60px 0 10% 4%; position: relative; }
+  .hero-text h1 { font-size: 65px; font-weight: 600; letter-spacing: -2.5px; color: var(--blue); margin-left: -5px; }
+  .hero-text h2 { font-size: 4rem; font-weight: 300; letter-spacing: -2.5px; line-height: .8; color: var(--navy); margin: 10px 0 0 -7px; }
+  .hero-cta { display: flex; align-items: center; gap: 2em; margin-top: 2em; }
+  .hours-box { display: flex; align-items: center; gap: 14px; color: #3d79b5; font-weight: 700; font-size: 15px; line-height: 1.8; }
+  .hours-box svg { width: 48px; height: 48px; flex: none; }
+  .hero-art { flex: 0 0 50%; padding: 6% 3em 0; }
+  .plus { position: absolute; color: var(--blue-2); pointer-events: none; }
+  .plus svg { width: 100%; height: 100%; fill: currentColor; }
+
+  /* Why choose us */
+  .why { position: relative; background: var(--blue); padding: 120px 20px; overflow: hidden; border-top: 1px solid var(--line); }
+  .why::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%231d4fa0' stroke-width='2' opacity='.5'%3E%3Cpath d='M10 10l10 10M20 10L10 20'/%3E%3Ccircle cx='45' cy='45' r='6'/%3E%3C/g%3E%3C/svg%3E"); opacity: .6; }
+  .why .wrap { position: relative; z-index: 3; max-width: 1200px; text-align: center; }
+  .section-title { font-size: 2.5rem; font-weight: 300; line-height: 1; color: #fff; margin-bottom: 40px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); padding-top: 20px; }
+  .card {
+    margin: 10px; padding: 2em; border: 1px solid #e5e5e5; border-radius: 10px; background: var(--blue); color: #fff;
+    transition: background-color .9s, border-color .3s, box-shadow .3s;
+  }
+  .card:hover { background: var(--navy); border-color: #01bf83; box-shadow: 0 22px 20px 2px rgba(97,192,211,.26); }
+  .card.light { background: #fff; color: var(--text); box-shadow: 0 31px 19px -10px rgba(97,192,211,.26); padding: 2em 1em; }
+  .card.light:hover { background: var(--ice); box-shadow: -2px 1px 20px 2px rgba(97,192,211,.26); }
+  .card.light h4, .card.light .btn-ghost { color: var(--blue); }
+  .card.light .btn-ghost:hover { color: #fff; }
+  .card .art { width: 60%; height: 170px; margin: 0 auto; }
+  .card h4 { font-size: 1.2rem; font-weight: 700; letter-spacing: -.3px; margin: 40px 0 12px; }
+  .card p { font-size: .9rem; font-weight: 500; font-style: italic; line-height: 1.4; }
+  .card .btn { margin-top: 20px; }
+  .why .btn-mint { margin-top: 40px; }
+
+  /* Privacy */
+  .privacy { position: relative; background: linear-gradient(360deg, #fff 54%, var(--ice) 95%); padding: 60px 6% 70px; overflow: hidden; }
+  .privacy .wrap { position: relative; z-index: 3; display: flex; align-items: center; min-height: 40vh; }
+  .privacy .art-col { flex: 0 0 50%; padding: 6% 3em 0; }
+  .privacy .text-col { flex: 0 0 50%; padding: 2% 0 6%; }
+  .privacy .inner { max-width: 460px; }
+  .eyebrow { font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: -.3px; color: var(--blue); margin-top: 40px; }
+  .h3 { font-size: 2.1rem; font-weight: 300; line-height: 1; color: var(--navy); margin-top: 20px; }
+  .lead { font-size: 1rem; font-weight: 500; line-height: 1.6; margin-top: 40px; }
+  .privacy .btn-link { margin-top: 20px; }
+
+  /* FAQ + departments */
+  .faq { background: #fff; padding: 70px 0; }
+  .faq .wrap { max-width: 1400px; display: grid; grid-template-columns: 1fr 1fr; }
+  .faq .col { padding: 10%; }
+  details { border-bottom: 1px solid #edf2fa; }
+  summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 10px 0 14px; color: var(--text); line-height: 1.1; font-weight: 500; transition: color .2s; }
+  summary::-webkit-details-marker { display: none; }
+  summary svg { width: 18px; height: 18px; fill: #c5d6f1; flex: none; transition: transform .25s; }
+  details[open] summary { color: var(--navy); }
+  details[open] summary svg { transform: rotate(90deg); }
+  details p { padding: 0 2em 2em; font-size: .9rem; line-height: 1.6; color: var(--text); }
+  .faq .h3:first-child { margin-bottom: 30px; }
+  .dept { display: flex; gap: 18px; margin-top: 36px; }
+  .dept .ico { flex: 0 0 56px; height: 56px; border-radius: 14px; background: var(--ice); display: grid; place-items: center; }
+  .dept .ico svg { width: 30px; height: 30px; }
+  .dept h5 { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 11px; }
+  .dept p { font-size: .9rem; line-height: 1.6; color: var(--text); }
+
+  /* Testimonials */
+  .testi { position: relative; background: var(--ice); padding: 40px 0 0; border-top: 1px solid var(--line); min-height: 490px; overflow: hidden; }
+  .testi .wrap { position: relative; z-index: 3; max-width: 1350px; display: grid; grid-template-columns: 35.3fr 42.9fr 35.5fr; align-items: end; min-height: 450px; }
+  .testi .col-a { align-self: start; padding: 4% 8% 8%; }
+  .testi .col-c { align-self: start; padding: 8%; }
+  .testi h4 { font-size: 1.2rem; font-weight: 700; color: var(--blue); margin: 40px 0 20px 4px; }
+  blockquote { font-style: italic; line-height: 1.6; color: var(--text); margin-bottom: 24px; }
+  .col-a blockquote { font-size: 1.1rem; }
+  .col-c blockquote { font-size: .8rem; }
+  .who { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-2), var(--mint)); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px; font-style: normal; }
+  .who strong { display: block; color: var(--blue); font-size: 13px; }
+  .who span { display: block; color: var(--blue); font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; }
+
+  /* CTA */
+  .cta { position: relative; background: linear-gradient(360deg, var(--blue) 13%, #4a83d4 98%); padding: 140px 20px 120px; text-align: center; color: #fff; overflow: hidden; }
+  .cta::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%231d4fa0' stroke-width='2' opacity='.5'%3E%3Cpath d='M10 10l10 10M20 10L10 20'/%3E%3Ccircle cx='45' cy='45' r='6'/%3E%3C/g%3E%3C/svg%3E"); }
+  .cta .wrap { position: relative; z-index: 3; max-width: 700px; }
+  .cta p { font-size: 1rem; font-weight: 500; line-height: 1.6; }
+  .cta .btn { margin-top: 40px; }
+
+  footer { background: var(--navy); color: #c5d6f1; text-align: center; font-size: 13px; padding: 22px; }
+
+  /* Entrance animations */
+  [data-anim] { opacity: 0; transition: opacity .6s ease, transform .6s ease; }
+  [data-anim="up"] { transform: translateY(40px); }
+  [data-anim="down"] { transform: translateY(-40px); }
+  [data-anim="left"] { transform: translateX(-40px); }
+  [data-anim="zoom"] { transform: scale(.6); }
+  [data-anim].in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { [data-anim] { opacity: 1; transform: none; transition: none; } .btn:hover { transform: none; } }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .topbar { padding: 0; }
+    .topbar h3 { flex-basis: 25%; }
+    .topbar .hours { text-align: center; font-size: .8rem; }
+    .topbar .phone { font-size: .8rem; }
+    .hero { padding: 0; }
+    .hero .wrap { flex-direction: column; }
+    .hero-text { flex-basis: auto; width: 100%; padding: 4em 2em 2em; text-align: center; }
+    .hero-text h2 { font-size: 42px; }
+    .hero-cta { justify-content: center; }
+    .hero-art { width: 100%; max-width: 560px; padding: 0 2em 3em; }
+    .privacy .wrap { flex-direction: column-reverse; }
+    .privacy .art-col, .privacy .text-col { width: 100%; }
+    .privacy .art-col { max-width: 520px; }
+    .card { padding: 40px 15px; }
+    .faq { padding: 0; }
+    .testi .wrap { grid-template-columns: 1fr 1fr; }
+    .testi .col-a { grid-column: 1 / -1; padding: 15px; text-align: center; }
+    .testi .col-a .who { justify-content: center; }
+    .testi .col-c { padding: 2em; }
+  }
+  /* Mobile */
+  @media (max-width: 767px) {
+    .topbar { padding: 20px 0 10px; }
+    .topbar .wrap { flex-direction: column; text-align: center; gap: 6px; }
+    .topbar h3, .topbar .hours, .topbar .phone { padding: 0; text-align: center; flex-basis: auto; line-height: 1; }
+    .hero-text h1 { font-size: 2.4rem; letter-spacing: -1.5px; }
+    .hero-text h2 { font-size: 2.3rem; line-height: 1; }
+    .hours-box, .plus.hide-m { display: none; }
+    .section-title { font-size: 2.3rem; }
+    .cards { grid-template-columns: 1fr; padding-top: 0; }
+    .why { padding: 80px 20px 50px; }
+    .h3 { font-size: 1.6rem; }
+    .privacy .text-col, .faq .col { text-align: center; }
+    .faq .wrap { grid-template-columns: 1fr; }
+    .faq .col { padding: 2.5em 1.5em; text-align: left; }
+    .faq .h3 { text-align: center; }
+    .testi .wrap { grid-template-columns: 1fr; }
+    .testi .col-b { order: 3; }
+    .cta { padding: 4em 1em 3em; }
+    .cta p { font-size: .9rem; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="plus" viewBox="0 0 24 24"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></symbol>
+    <symbol id="wave" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M1000 0H0v32.6c47.4-13.1 81.3-17.4 145.8-6.8C233 40 291 60 375 60s156-28.8 247.5-36c96-7.6 145.5 10.8 223.3 23.4C916 58.6 960 53 1000 45z"/></symbol>
+    <symbol id="angle" viewBox="0 0 24 24"><path d="M8.6 5.6 10 4.2 17.8 12 10 19.8l-1.4-1.4L15 12z"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M2 11h16.2l-4.6-4.6L15 5l7 7-7 7-1.4-1.4 4.6-4.6H2z"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1.4 5.4L9.2 8.8 12.4 12l-3.2 3.2 1.4 1.4 4.6-4.6z"/></symbol>
+  </defs>
+</svg>
+
+<!-- Top bar -->
+<header class="topbar">
+  <div class="wrap">
+    <h3 data-anim="zoom">Working Hours</h3>
+    <p class="hours" data-anim="left"><b>Mon - Fri</b>: 08 AM - 08 PM - <b>Sat</b>: 08 AM - 03 PM</p>
+    <p class="phone" data-anim="left"><a href="tel:+003555826432">+ 0035 558 -264-32</a></p>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <span class="plus hide-m" style="width:155px;height:155px;left:-150px;top:10px;color:rgba(76,134,211,.21)" data-anim="up"><svg><use href="#plus"/></svg></span>
+      <span class="plus" style="width:61px;height:61px;right:50px;top:20px" data-anim="up"><svg><use href="#plus"/></svg></span>
+      <span class="plus" style="width:24px;height:24px;left:118px;top:40px;color:var(--mint)" data-anim="up"><svg><use href="#plus"/></svg></span>
+      <span class="plus hide-m" style="width:80px;height:80px;right:-60px;top:52%;color:var(--mint)" data-anim="up"><svg><use href="#plus"/></svg></span>
+      <h1 data-anim="up" style="transition-delay:.3s">Best Health Care</h1>
+      <h2 data-anim="up" style="transition-delay:.3s">Feel free to be healthy.</h2>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Book Online</a>
+        <div class="hours-box" data-anim="up" style="transition-delay:.5s">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#e9eff9"/><circle cx="24" cy="24" r="16" fill="#fff" stroke="#2e70ce" stroke-width="3"/><path d="M24 15v10l7 4" stroke="#47e0b0" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+          <span>08:00 AM - 06:00 PM<br>08:00 AM - 04:00 PM</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-art" data-anim="up">
+      <!-- Workout illustration -->
+      <svg viewBox="0 0 520 420" role="img" aria-label="Person exercising">
+        <ellipse cx="260" cy="395" rx="230" ry="16" fill="#1d2366" opacity=".12"/>
+        <circle cx="400" cy="90" r="60" fill="#47e0b0" opacity=".25"/>
+        <circle cx="120" cy="150" r="34" fill="#fff" opacity=".35"/>
+        <rect x="70" y="372" width="380" height="14" rx="7" fill="#2e70ce"/>
+        <!-- mat -->
+        <rect x="150" y="360" width="250" height="14" rx="7" fill="#47e0b0"/>
+        <!-- legs -->
+        <path d="M250 250 L215 300 L180 360" stroke="#1d2366" stroke-width="22" stroke-linecap="round" fill="none"/>
+        <path d="M262 250 L305 305 L340 360" stroke="#1d2366" stroke-width="22" stroke-linecap="round" fill="none"/>
+        <path d="M168 362h30M330 362h30" stroke="#fa4a57" stroke-width="12" stroke-linecap="round"/>
+        <!-- torso -->
+        <rect x="228" y="150" width="56" height="110" rx="26" fill="#fff"/>
+        <path d="M232 170 h48" stroke="#e9eff9" stroke-width="6"/>
+        <!-- arms + dumbbells -->
+        <path d="M236 172 L180 140 L150 90" stroke="#f2b9a0" stroke-width="16" stroke-linecap="round" fill="none"/>
+        <path d="M276 172 L332 140 L362 90" stroke="#f2b9a0" stroke-width="16" stroke-linecap="round" fill="none"/>
+        <rect x="120" y="76" width="60" height="12" rx="6" fill="#1d2366"/><rect x="112" y="64" width="16" height="36" rx="5" fill="#2e70ce"/><rect x="172" y="64" width="16" height="36" rx="5" fill="#2e70ce"/>
+        <rect x="332" y="76" width="60" height="12" rx="6" fill="#1d2366"/><rect x="324" y="64" width="16" height="36" rx="5" fill="#2e70ce"/><rect x="384" y="64" width="16" height="36" rx="5" fill="#2e70ce"/>
+        <!-- head -->
+        <circle cx="256" cy="118" r="28" fill="#f2b9a0"/>
+        <path d="M228 112c0-22 14-34 30-34s30 12 28 32c-10-10-30-14-58 2z" fill="#1d2366"/>
+        <path d="M282 96c18 0 26 10 24 22" stroke="#1d2366" stroke-width="10" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+  </div>
+  <div class="divider bottom flip"><svg style="height:42px;fill:#e9eff9"><use href="#wave"/></svg></div>
+</section>
+
+<!-- Why choose us -->
+<section class="why">
+  <div class="divider top"><svg style="height:16px;fill:#e9eff9"><use href="#wave"/></svg></div>
+  <div class="wrap">
+    <h3 class="section-title" data-anim="up" style="transition-delay:.3s">Why choose us?</h3>
+    <div class="cards">
+      <article class="card" data-anim="up">
+        <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
+          <rect x="40" y="20" width="86" height="140" rx="14" fill="#1d2366"/><rect x="48" y="34" width="70" height="108" rx="6" fill="#e9eff9"/>
+          <rect x="56" y="46" width="54" height="10" rx="5" fill="#2e70ce"/><rect x="56" y="64" width="40" height="8" rx="4" fill="#4c86d3" opacity=".6"/>
+          <rect x="56" y="82" width="54" height="34" rx="6" fill="#fff"/><path d="M62 104l10-10 8 8 14-14" stroke="#47e0b0" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="83" cy="152" r="4" fill="#4c86d3"/>
+          <circle cx="150" cy="60" r="26" fill="#47e0b0"/><path d="M140 60l7 7 14-14" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <circle cx="160" cy="130" r="14" fill="#fff" opacity=".4"/>
+        </svg>
+        <h4>Convenient</h4>
+        <p>We fight the hardest conditions with hardest resources.</p>
+        <a href="#" class="btn btn-ghost">Read More <svg><use href="#angle"/></svg></a>
+      </article>
+      <article class="card light" data-anim="up" style="transition-delay:.15s">
+        <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
+          <ellipse cx="100" cy="160" rx="80" ry="7" fill="#e9eff9"/>
+          <circle cx="68" cy="56" r="20" fill="#f2b9a0"/><path d="M48 52c0-16 10-24 20-24s20 8 20 22c-8-6-24-8-40 2z" fill="#1d2366"/>
+          <rect x="44" y="80" width="48" height="76" rx="22" fill="#2e70ce"/>
+          <circle cx="132" cy="62" r="18" fill="#c98a6b"/><path d="M114 58c0-14 8-20 18-20s18 6 18 20c-6-8-24-8-36 0z" fill="#fa4a57"/>
+          <rect x="110" y="84" width="44" height="72" rx="20" fill="#47e0b0"/>
+          <path d="M90 104c12 10 20 10 22 0" stroke="#f2b9a0" stroke-width="10" stroke-linecap="round" fill="none"/>
+          <path d="M100 18c-6-8-18-2-12 8l12 12 12-12c6-10-6-16-12-8z" fill="#fa4a57"/>
+        </svg>
+        <h4>Affordable</h4>
+        <p>Help your most hard working muscle keep working.</p>
+        <a href="#" class="btn btn-ghost">Read More <svg><use href="#angle"/></svg></a>
+      </article>
+      <article class="card" data-anim="up" style="transition-delay:.3s">
+        <svg class="art" viewBox="0 0 200 170" aria-hidden="true">
+          <path d="M100 14l60 22v44c0 40-26 66-60 80-34-14-60-40-60-80V36z" fill="#1d2366"/>
+          <path d="M100 30l46 17v34c0 30-20 52-46 64-26-12-46-34-46-64V47z" fill="#e9eff9"/>
+          <rect x="78" y="74" width="44" height="38" rx="6" fill="#2e70ce"/>
+          <path d="M86 74v-10a14 14 0 0 1 28 0v10" stroke="#2e70ce" stroke-width="7" fill="none"/>
+          <circle cx="100" cy="90" r="5" fill="#fff"/><rect x="98" y="92" width="4" height="10" rx="2" fill="#fff"/>
+          <circle cx="166" cy="128" r="16" fill="#47e0b0"/><path d="M159 128l5 5 9-9" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h4>Secure</h4>
+        <p>Your teeth will be taken care of the best possible way</p>
+        <a href="#" class="btn btn-ghost">Read More <svg><use href="#angle"/></svg></a>
+      </article>
+    </div>
+    <a href="#how" class="btn btn-mint">How it works</a>
+  </div>
+</section>
+
+<!-- Privacy -->
+<section class="privacy" id="how">
+  <div class="divider top"><svg style="height:64px;fill:#2e70ce"><use href="#wave"/></svg></div>
+  <div class="wrap">
+    <div class="art-col" data-anim="up">
+      <!-- Video call illustration -->
+      <svg viewBox="0 0 520 400" role="img" aria-label="Online consultation">
+        <circle cx="260" cy="200" r="180" fill="#e9eff9"/>
+        <rect x="70" y="70" width="380" height="250" rx="18" fill="#1d2366"/>
+        <rect x="86" y="86" width="348" height="200" rx="8" fill="#fff"/>
+        <rect x="200" y="320" width="120" height="16" fill="#1d2366"/><rect x="160" y="336" width="200" height="12" rx="6" fill="#2e70ce"/>
+        <!-- doctor on screen -->
+        <circle cx="260" cy="160" r="34" fill="#f2b9a0"/>
+        <path d="M226 154c0-26 16-38 34-38s34 12 34 36c-12-12-40-14-68 2z" fill="#1d2366"/>
+        <path d="M200 286c0-50 26-80 60-80s60 30 60 80z" fill="#e9eff9"/>
+        <path d="M244 210l16 30 16-30" fill="#2e70ce"/>
+        <path d="M232 222c-6 20 0 34 14 40" stroke="#47e0b0" stroke-width="5" fill="none"/><circle cx="248" cy="264" r="6" fill="#47e0b0"/>
+        <!-- play button -->
+        <circle cx="400" cy="250" r="30" fill="#fa4a57"/><path d="M392 236v28l22-14z" fill="#fff"/>
+        <rect x="100" y="100" width="60" height="44" rx="6" fill="#4c86d3" opacity=".25"/>
+        <circle cx="440" cy="60" r="14" fill="#47e0b0"/>
+      </svg>
+    </div>
+    <div class="text-col">
+      <span class="plus" style="position:relative;display:block;width:61px;height:61px" data-anim="up"><svg><use href="#plus"/></svg></span>
+      <div class="inner">
+        <h4 class="eyebrow" data-anim="down" style="transition-delay:.3s">We value your privacy</h4>
+        <h3 class="h3" data-anim="up" style="transition-delay:.3s">Meet in the comfort of your own home.</h3>
+        <p class="lead" data-anim="up" style="transition-delay:.5s">From immunizations to checkups and preventive care, exams, our primary care physicians and providers work to keep you and your whole family healthy and strong each and every day.</p>
+        <a href="#departments" class="btn btn-link">All the Departments <svg><use href="#arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="divider bottom"><svg style="height:51px;fill:#fff"><use href="#wave"/></svg></div>
+</section>
+
+<!-- FAQ + departments -->
+<section class="faq" id="departments">
+  <div class="wrap">
+    <div class="col">
+      <h3 class="h3" data-anim="up" style="transition-delay:.3s">Frequently Asked Questions</h3>
+      <details open><summary><svg><use href="#chev"/></svg>Accordion #1</summary><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></details>
+      <details><summary><svg><use href="#chev"/></svg>Accordion #2</summary><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></details>
+      <details><summary><svg><use href="#chev"/></svg>Accordion #3</summary><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></details>
+      <details><summary><svg><use href="#chev"/></svg>Accordion #4</summary><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></details>
+      <details><summary><svg><use href="#chev"/></svg>Accordion #5</summary><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></details>
+      <details><summary><svg><use href="#chev"/></svg>Accordion #6</summary><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></details>
+    </div>
+    <div class="col">
+      <h3 class="h3" data-anim="up" style="transition-delay:.3s">Affordable care for day-to-day needs.</h3>
+      <div class="dept">
+        <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 4h8M14 4v9L7 25a3 3 0 0 0 2.6 4.5h12.8A3 3 0 0 0 25 25l-7-12V4" stroke="#2e70ce" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 21h12l2.4 4.2a1.5 1.5 0 0 1-1.3 2.3H8.9a1.5 1.5 0 0 1-1.3-2.3z" fill="#47e0b0"/></svg></div>
+        <div><h5>Hair, Skin &amp; Nails</h5><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></div>
+      </div>
+      <div class="dept">
+        <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6c-3-3-9-2-10 3-3 1-3 6 0 7-1 4 3 7 6 6 1 3 5 3 4-1V6zM16 6c3-3 9-2 10 3 3 1 3 6 0 7 1 4-3 7-6 6-1 3-5 3-4-1" stroke="#2e70ce" stroke-width="2.2" fill="none" stroke-linejoin="round"/><circle cx="16" cy="15" r="3" fill="#47e0b0"/></svg></div>
+        <div><h5>Mental Health</h5><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></div>
+      </div>
+      <div class="dept">
+        <div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 16s5-9 13-9 13 9 13 9-5 9-13 9S3 16 3 16z" stroke="#2e70ce" stroke-width="2.4" fill="none"/><circle cx="16" cy="16" r="5" fill="#47e0b0"/><circle cx="16" cy="16" r="2" fill="#1d2366"/></svg></div>
+        <div><h5>Eye, Ear &amp; Sinus</h5><p>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testi">
+  <div class="divider top flip"><svg style="height:51px;fill:#fff"><use href="#wave"/></svg></div>
+  <div class="wrap">
+    <div class="col-a" data-anim="up">
+      <h4>What our patients say:</h4>
+      <blockquote>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+        <div class="who"><i class="avatar">JD</i><div><strong>John Doe</strong><span>Designer</span></div></div>
+      </blockquote>
+    </div>
+    <div class="col-b">
+      <!-- Doctor illustration -->
+      <svg viewBox="0 0 460 440" role="img" aria-label="Doctor">
+        <circle cx="230" cy="250" r="190" fill="#fff" opacity=".7"/>
+        <path d="M110 440c0-100 50-170 120-170s120 70 120 170z" fill="#fff"/>
+        <path d="M200 280l30 60 30-60" fill="#2e70ce"/>
+        <path d="M110 440c0-80 30-140 80-160l-10 160zM350 440c0-80-30-140-80-160l10 160z" fill="#e9eff9"/>
+        <rect x="212" y="236" width="36" height="44" rx="8" fill="#e8a88c"/>
+        <circle cx="230" cy="190" r="56" fill="#f2b9a0"/>
+        <path d="M172 186c-4-52 28-80 62-78 36 2 62 30 54 76-14-26-44-36-70-28-18 6-34 14-46 30z" fill="#1d2366"/>
+        <circle cx="210" cy="196" r="5" fill="#1d2366"/><circle cx="250" cy="196" r="5" fill="#1d2366"/>
+        <path d="M216 220c8 8 20 8 28 0" stroke="#c46d55" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M188 300c-14 40-6 74 22 84" stroke="#47e0b0" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="214" cy="386" r="12" fill="#47e0b0"/>
+        <rect x="292" y="330" width="34" height="8" rx="4" fill="#fa4a57"/><rect x="305" y="317" width="8" height="34" rx="4" fill="#fa4a57"/>
+      </svg>
+    </div>
+    <div class="col-c" data-anim="up" style="transition-delay:.2s">
+      <blockquote>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+        <div class="who"><i class="avatar">JD</i><div><strong>John Doe</strong><span>Designer</span></div></div>
+      </blockquote>
+      <blockquote>Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+        <div class="who"><i class="avatar">JD</i><div><strong>John Doe</strong><span>Designer</span></div></div>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="divider top"><svg style="height:37px;fill:#e9eff9"><use href="#wave"/></svg></div>
+  <div class="wrap">
+    <h3 class="section-title" data-anim="left" style="transition-delay:.3s">Join the healthy revolution today.</h3>
+    <p data-anim="left" style="transition-delay:.5s">From immunizations to checkups and preventive care, exams, our primary care physicians and providers work to keep you and your whole family healthy and strong each and every day.</p>
+    <a href="tel:+003555826432" class="btn btn-red">Sign up today</a>
+  </div>
+</section>
+
+<footer>&copy; <span id="y"></span> Best Health Care. All rights reserved.</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('[data-anim]').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
